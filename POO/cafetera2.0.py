@@ -1,4 +1,7 @@
-#Clases Juan Esteban
+
+# ================= CLASES =================
+
+# Clases Juan Esteban
 class Cafetera:
     def __init__(self,marca, modelo, tamaño, capacidad, temperaturaMaxEx, temperaturaMinEx, Material, tiempo_de_prepa ):
         self.marca = marca
@@ -23,7 +26,7 @@ class Resistencia:
         self.Estado = Estado
         self.Temperatura = Temperatura
         
-#Clases Jeremy Patiño
+# Clases Jeremy Patiño
 class deposito:
     def __init__(self, tamaño, capacidad ):
         self.tamaño = tamaño
@@ -43,7 +46,7 @@ class Filtro:
         self.densidad = densidad
         self.material = material
 
-#Clases Edward Suarez
+# Clases Edward Suarez
 class goteo:
     def __init__(self,cantidadagua):
         self.cantidad = cantidadagua
@@ -58,8 +61,10 @@ class indicador:
         self.tipo = tipo
         self.estado = estado
 
-#Variables de las Clases
-cafetera1 = Cafetera("Oster", "BVSTEM7301", "34.5 cm ×27.8 cm ×30 cm", "2.8 litros", "96 °C",  "88 °C", "ACERO Y PLASTICO", "3 0 4 MINUTOS")
+
+# ================= OBJETOS =================
+
+cafetera1 = Cafetera("Oster", "BVSTEM7301", "34.5 cm ×27.8 cm ×30 cm", "2.8 litros", "96 °C",  "88 °C", "ACERO Y PLASTICO", "3-4 MINUTOS")
 
 Placa1 = Placa_Calefactora("55° y 60°", "1380W - 1450W ", "Encendido/Apagado")
 
@@ -69,60 +74,125 @@ deposito1 = deposito ("23.5cm * 22.5cm * 6cm", "2.8 litros")
 
 sensor1 = sensor ("nivel de agua","100%", "mililitros", "mililitros")
 sensor2 = sensor ("nivel de peso", "85%", "gramos", "gramos")
-sensor3 = sensor ("nivel de temperatura","98.9%", "°C", "°C")
-sensor4 = sensor ("nivel de presion","90%", "Bares", "Bares")
 
 filtro1 = Filtro ("filtro de canasta", "10-12 tazas", "8.0 g/cm³", "acero inoxidable")
 
-goteo1 = goteo("30 ml")
-goteo2 = goteo("50 ml")
-
 jarra1 = jarra("600 ml", "80%")
-jarra2 = jarra("700 ml", "70%")
 
-indicador1 = indicador("Sonoro", "Encendido")
-indicador2 = indicador("Visual", "Apagado")
 
-#prints de las clases
-#print(cafetera1.marca, cafetera1.modelo, cafetera1.tamaño, cafetera1.capacidad, cafetera1.temperaturaMaxEx, cafetera1.temperaturaMinEx, cafetera1.Material, cafetera1.tiempo_de_prepa, sep="\n")
-#print(Placa1.TemperaturaMax, Placa1.PasodeCo, Placa1.Estado, sep="\n")
-#print(Resis1.Potencia, Resis1.Voltaje, Resis1.Estado, Resis1.Temperatura, sep="\n")
-#print("la cafetera:",cafetera1.modelo,"de la marca: ",cafetera1.marca,"tiene una resistencia cuya potencia es: ",Resis1.Potencia,"Y una placa calefactora cuya Temperatura es: ",Placa1.TemperaturaMax, sep="\n")
-
-#print(sensor1.tipo_sensor, sensor1.nivel_exactitud, sensor1.unidad_medida, sensor1.medidas_comparacion, sep="\n")
-#print("\n", sensor2.tipo_sensor, sensor2.nivel_exactitud, sensor2.unidad_medida, sensor2.medidas_comparacion, sep="\n")
-#print("\n", sensor3.tipo_sensor, sensor3.nivel_exactitud, sensor3.unidad_medida, sensor3.medidas_comparacion, sep="\n")
-#print("\n", sensor4.tipo_sensor, sensor4.nivel_exactitud, sensor4.unidad_medida, sensor4.medidas_comparacion, sep="\n")
-#print ("---------------------------------------------------------------------------------------------------------------------")
-#print("\n", deposito1.capacidad, deposito1.tamaño , sep="\n")
-#print ("--------------------------------------------------------------------------------------------------------------------")
-#print("\n", filtro1.tipo, filtro1.capacidad, filtro1.material, filtro1.densidad, sep="\n")
-
-#print("Goteo 1", goteo1.cantidad, sep="\n")
-#print("\nGoteo 2", goteo2.cantidad, sep="\n")
-#print("-------------------")
-
-#print("Jarra 1", jarra1.capacidad, jarra1.nivelleno, sep="\n")
-#print("\nJarra 2", jarra2.capacidad, jarra2.nivelleno, sep="\n")
-#print("-------------------")
-
-#print("Indicador 1", indicador1.tipo, indicador1.estado, sep="\n")
-#print("\nIndicador 2", indicador2.tipo, indicador2.estado, sep="\n")
-#print("-------------------")
+# ================= FUNCIONES =================
 
 def encendido():
     while True:
-        en = input("¿Desea encender la cafetera? S/N: ")
+        en = input("¿La cafetera está conectada a corriente? (S/N): ").strip().upper()
         
         if en == "S":
-            inicio()
-            break
+            return True
         elif en == "N":
-            print("La cafetera sigue apagada.")
+            print("Por favor conecta la cafetera.")
         else:
             print("Opción no válida")
 
-def inicio():
-    comp_cafe=input("¿El deposito tiene agua y cafe? S/N :")
+
+def pedir_nombre():
+    nombre = ""
+    while not nombre.strip():
+        nombre = input("Ingresa tu nombre de usuario: ").strip()
     
-encendido()
+    return nombre
+
+
+def comprobar_agua(sensor_agua):
+    print(f"Sensor utilizado: {sensor_agua.tipo_sensor}")
+    
+    while True:
+        respuesta = input("¿El depósito tiene agua? (S/N): ").strip().upper()
+        
+        if respuesta == "S":
+            print("✔ Hay agua suficiente.")
+            return True
+        elif respuesta == "N":
+            print("❌ No hay agua.")
+            return False
+        else:
+            print("Opción no válida")
+
+
+def llenar_jarra(jarra_obj):
+    while True:
+        try:
+            nivel = int(input("Ingresa el nivel de la jarra (0 a 100): "))
+            
+            if 0 <= nivel <= 100:
+                jarra_obj.nivelleno = f"{nivel}%"
+                print(f"Nivel actualizado: {jarra_obj.nivelleno}")
+                return
+            else:
+                print("El nivel debe estar entre 0 y 100.")
+        
+        except ValueError:
+            print("Ingresa un número válido.")
+
+
+def comprobar_jarra(jarra_obj, sensor_peso):
+    print(f"Sensor utilizado: {sensor_peso.tipo_sensor}")
+    print(f"Exactitud: {sensor_peso.nivel_exactitud}")
+    
+    print(f"Capacidad de la jarra: {jarra_obj.capacidad}")
+    print(f"Nivel actual: {jarra_obj.nivelleno}")
+    
+    nivel = int(jarra_obj.nivelleno.replace("%", ""))
+    
+    while True:
+        respuesta = input("¿El sensor detecta la jarra colocada? (S/N): ").strip().upper()
+        
+        if respuesta == "S":
+            if nivel >= 90:
+                print("⚠ La jarra está demasiado llena.")
+                return False
+            elif nivel <= 10:
+                print("⚠ La jarra está muy vacía.")
+                return False
+            else:
+                print("✔ Jarra detectada y en nivel adecuado.")
+                return True
+        
+        elif respuesta == "N":
+            print("❌ El sensor no detecta la jarra. Colócala correctamente.")
+            return False
+        
+        else:
+            print("Opción no válida.")
+
+
+def iniciar_cafetera():
+    print("☕ La cafetera está en funcionamiento...")
+
+
+# ================= MAIN =================
+
+def main():
+    print("------ SISTEMA DE CAFETERA ------")
+    
+    if not encendido():
+        return
+    
+    nombre = pedir_nombre()
+    print(f"Hola, {nombre}! Bienvenido.")
+    
+    if not comprobar_agua(sensor1):
+        print("No se puede iniciar sin agua 🚫")
+        return
+    
+    llenar_jarra(jarra1)
+    
+    if not comprobar_jarra(jarra1, sensor2):
+        print("No se puede iniciar por problema con la jarra 🚫")
+        return
+    
+    iniciar_cafetera()
+
+
+# ================= EJECUCIÓN =================
+
+main()
