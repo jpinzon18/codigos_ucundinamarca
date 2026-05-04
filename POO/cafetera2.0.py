@@ -109,10 +109,10 @@ def comprobar_agua(sensor_agua):
         respuesta = input("¿El depósito tiene agua? (S/N): ").strip().upper()
         
         if respuesta == "S":
-            print("✔ Hay agua suficiente.")
+            print(" Hay agua suficiente.")
             return True
         elif respuesta == "N":
-            print("❌ No hay agua.")
+            print(" No hay agua.")
             return False
         else:
             print("Opción no válida")
@@ -148,17 +148,17 @@ def comprobar_jarra(jarra_obj, sensor_peso):
         
         if respuesta == "S":
             if nivel >= 90:
-                print("⚠ La jarra está demasiado llena.")
+                print(" La jarra está demasiado llena.")
                 return False
             elif nivel <= 10:
-                print("⚠ La jarra está muy vacía.")
+                print(" La jarra está muy vacía.")
                 return False
             else:
-                print("✔ Jarra detectada y en nivel adecuado.")
+                print(" Jarra detectada y en nivel adecuado.")
                 return True
         
         elif respuesta == "N":
-            print("❌ El sensor no detecta la jarra. Colócala correctamente.")
+            print("El sensor no detecta la jarra. Colócala correctamente.")
             return False
         
         else:
@@ -166,7 +166,7 @@ def comprobar_jarra(jarra_obj, sensor_peso):
 
 
 def iniciar_cafetera():
-    print("☕ La cafetera está en funcionamiento...")
+    print(" La cafetera está en funcionamiento...")
 
 
 # ================= MAIN =================
@@ -181,13 +181,13 @@ def main():
     print(f"Hola, {nombre}! Bienvenido.")
     
     if not comprobar_agua(sensor1):
-        print("No se puede iniciar sin agua 🚫")
+        print("No se puede iniciar sin agua ")
         return
     
     llenar_jarra(jarra1)
     
     if not comprobar_jarra(jarra1, sensor2):
-        print("No se puede iniciar por problema con la jarra 🚫")
+        print("No se puede iniciar por problema con la jarra ")
         return
     
     iniciar_cafetera()
