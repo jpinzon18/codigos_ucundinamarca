@@ -1,0 +1,6 @@
+init 1000 python:
+    for gallery_item in gallery_items:
+        if gallery_item is not None:
+            renpy.mark_image_seen(gallery_item.name)
+            for gallery_item_image in gallery_item.images:
+                renpy.mark_image_seen(gallery_item_image)
